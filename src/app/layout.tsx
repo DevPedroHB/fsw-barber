@@ -1,13 +1,12 @@
 import { cn } from "@/functions/utils";
-import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
-const inter = Inter({
+const nunito = Nunito({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-nunito",
 });
 
 export const metadata: Metadata = {
@@ -28,13 +27,11 @@ export default function RootLayout({ children }: Readonly<IRootLayout>) {
     <html lang="pt-br" className="dark" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background min-h-screen scroll-smooth font-sans antialiased",
-          inter.variable,
+          "min-h-screen scroll-smooth font-sans antialiased",
+          nunito.variable,
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
