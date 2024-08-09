@@ -21,7 +21,7 @@ export function Navbar() {
   }
 
   return (
-    <Card className="h-24 w-full rounded-none">
+    <Card className="sticky top-0 h-24 w-full rounded-none">
       <CardContent className="mx-auto flex h-full max-w-[76.5rem] items-center justify-between gap-11 px-5 py-0">
         <Link href="/" className="relative w-[8.125rem]">
           <Image
@@ -34,14 +34,16 @@ export function Navbar() {
         </Link>
         <NavbarSearchForm />
         <div className="flex items-center gap-6 max-md:hidden">
-          <Link href={navbarLinks[1].path}>
+          <Link href={navbarLinks[1].path} title={navbarLinks[1].label}>
             <Button
               type="button"
               variant={pathname === navbarLinks[1].path ? "secondary" : "ghost"}
-              className="gap-2"
+              className="group gap-2 transition-all"
             >
-              <Calendar className="size-4" />
-              {navbarLinks[1].label}
+              <Calendar className="size-4 max-lg:size-5" />
+              <span className="max-lg:hidden max-lg:group-hover:flex">
+                {navbarLinks[1].label}
+              </span>
             </Button>
           </Link>
           {auth ? (
@@ -55,7 +57,12 @@ export function Navbar() {
                   <User2 className="size-5" />
                 </AvatarFallback>
               </Avatar>
-              <strong className="font-bold">Pedro Henrique Bérgamo</strong>
+              <div className="flex flex-1 flex-col">
+                <p className="text-sm font-bold">Pedro Henrique Bérgamo</p>
+                <small className="text-xs text-muted-foreground">
+                  pedrohenriquebergamo.16@gmail.com
+                </small>
+              </div>
             </div>
           ) : (
             <Button type="button" onClick={handleChangeAuth} className="gap-2">

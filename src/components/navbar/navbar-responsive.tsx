@@ -37,11 +37,11 @@ export function NavbarResponsive() {
           <Menu className="size-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="w-fit max-w-full">
         <SheetHeader>
           <SheetTitle className="text-start text-lg font-bold">Menu</SheetTitle>
         </SheetHeader>
-        <ScrollArea className="h-full">
+        <ScrollArea className="h-full" type="scroll">
           {auth ? (
             <div className="flex items-center gap-3 py-6">
               <Avatar className="relative size-12 border-2 border-primary">
@@ -50,13 +50,15 @@ export function NavbarResponsive() {
                   <User2 className="size-5" />
                 </AvatarFallback>
               </Avatar>
-              <div className="flex flex-col">
+              <div className="flex flex-1 flex-col">
                 <p className="font-bold">Pedro Henrique Bérgamo</p>
-                <small className="text-xs">email@pedrohb.dev</small>
+                <small className="text-xs text-muted-foreground">
+                  email@pedrohb.dev
+                </small>
               </div>
             </div>
           ) : (
-            <div className="flex items-center justify-between py-6">
+            <div className="flex items-center justify-between gap-6 py-6">
               <p className="text-lg font-bold">Olá, faça seu login!</p>
               <Button type="button" size="icon" onClick={handleChangeAuth}>
                 <LogIn className="size-5" />
@@ -69,6 +71,7 @@ export function NavbarResponsive() {
 
               return (
                 <NavbarLink
+                  key={link.label}
                   href={link.path}
                   className="w-full justify-start gap-3"
                 >
@@ -82,9 +85,10 @@ export function NavbarResponsive() {
             {filters.map((filter) => {
               return (
                 <Button
+                  key={filter.label}
                   type="button"
                   variant="ghost"
-                  className="justify-start gap-3"
+                  className="w-full justify-start gap-3"
                 >
                   <Image
                     src={filter.icon}
@@ -103,7 +107,7 @@ export function NavbarResponsive() {
                 type="button"
                 variant="ghost"
                 onClick={handleChangeAuth}
-                className="justify-start gap-3"
+                className="w-full justify-start gap-3"
               >
                 <LogOut className="size-4" />
                 Sair da conta
