@@ -40,11 +40,23 @@ export function LoginDialog({ children }: ILoginDialog) {
             onClick={handleSignInWithGoogle}
             className="flex-1 gap-2 font-bold"
           >
-            <Image src="/svgs/google.svg" alt="Github" width={16} height={16} />
+            <Image
+              src="/svgs/google.svg"
+              alt="Github"
+              width={16}
+              height={16}
+              className="invert dark:invert-0"
+            />
             Google
           </AlertDialogCancel>
           <AlertDialogCancel className="flex-1 gap-2 font-bold">
-            <Image src="/svgs/github.svg" alt="Github" width={16} height={16} />
+            <Image
+              src="/svgs/github.svg"
+              alt="Github"
+              width={16}
+              height={16}
+              className="invert dark:invert-0"
+            />
             Github
           </AlertDialogCancel>
         </AlertDialogFooter>

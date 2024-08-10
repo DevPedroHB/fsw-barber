@@ -1,5 +1,6 @@
 import { cn } from "@/functions/utils";
 import { SessionProvider } from "@/providers/session-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import type { ReactNode } from "react";
@@ -25,14 +26,18 @@ interface IRootLayout {
 
 export default function RootLayout({ children }: Readonly<IRootLayout>) {
   return (
-    <html lang="pt-br" className="dark" suppressHydrationWarning>
+    <html lang="pt-br" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen scroll-smooth font-sans antialiased",
           nunito.variable,
         )}
       >
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            {children}
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

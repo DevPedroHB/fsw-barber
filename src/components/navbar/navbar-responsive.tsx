@@ -2,11 +2,10 @@
 
 import { filters } from "@/constants/filters";
 import { navbarLinks } from "@/constants/navbar-links";
-import { LogIn, LogOut, Menu, User2 } from "lucide-react";
+import { LogIn, LogOut, Menu } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { LoginDialog } from "../login-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import {
@@ -18,6 +17,7 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { NavbarLink } from "./navbar-link";
+import { NavbarProfile } from "./navbar-profile";
 
 export function NavbarResponsive() {
   const { data } = useSession();
@@ -44,20 +44,7 @@ export function NavbarResponsive() {
         </SheetHeader>
         <ScrollArea className="h-full" type="scroll">
           {data?.user ? (
-            <div className="flex items-center gap-3 py-6">
-              <Avatar className="relative size-12 border-2 border-primary">
-                <AvatarImage src={data.user.image || ""} />
-                <AvatarFallback>
-                  <User2 className="size-5" />
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex flex-1 flex-col">
-                <p className="font-bold">{data.user.name}</p>
-                <small className="text-xs text-muted-foreground">
-                  {data.user.email}
-                </small>
-              </div>
-            </div>
+            <NavbarProfile variant="responsive" />
           ) : (
             <div className="flex items-center justify-between gap-6 py-6">
               <p className="text-lg font-bold">Olá, faça seu login!</p>
@@ -98,6 +85,7 @@ export function NavbarResponsive() {
                     alt={filter.label}
                     width={16}
                     height={16}
+                    className="invert dark:invert-0"
                   />
                   {filter.label}
                 </Button>

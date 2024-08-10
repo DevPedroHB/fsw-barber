@@ -1,15 +1,15 @@
 "use client";
 
 import { navbarLinks } from "@/constants/navbar-links";
-import { Calendar, User2, UserCircle2 } from "lucide-react";
+import { Calendar, UserCircle2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LoginDialog } from "../login-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
+import { NavbarProfile } from "./navbar-profile";
 import { NavbarResponsive } from "./navbar-responsive";
 import { NavbarSearchForm } from "./navbar-search-form";
 
@@ -44,20 +44,7 @@ export function Navbar() {
             </Button>
           </Link>
           {data?.user ? (
-            <div className="flex items-center gap-2">
-              <Avatar className="relative size-9">
-                <AvatarImage src={data.user.image || ""} />
-                <AvatarFallback>
-                  <User2 className="size-5" />
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex flex-1 flex-col">
-                <p className="text-sm font-bold">{data.user.name}</p>
-                <small className="text-xs text-muted-foreground">
-                  {data.user.email}
-                </small>
-              </div>
-            </div>
+            <NavbarProfile />
           ) : (
             <LoginDialog>
               <Button type="button" className="gap-2">
