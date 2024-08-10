@@ -3,8 +3,9 @@
 import { filters } from "@/constants/filters";
 import { navbarLinks } from "@/constants/navbar-links";
 import { LogIn, LogOut, Menu, User2 } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { useState } from "react";
+import { LoginDialog } from "../login-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
@@ -19,10 +20,10 @@ import {
 import { NavbarLink } from "./navbar-link";
 
 export function NavbarResponsive() {
-  const [auth, setAuth] = useState(false);
+  const { data } = useSession();
 
-  function handleChangeAuth() {
-    setAuth((prev) => !prev);
+  function handleSignOut() {
+    signOut();
   }
 
   return (
@@ -42,27 +43,29 @@ export function NavbarResponsive() {
           <SheetTitle className="text-start text-lg font-bold">Menu</SheetTitle>
         </SheetHeader>
         <ScrollArea className="h-full" type="scroll">
-          {auth ? (
+          {data?.user ? (
             <div className="flex items-center gap-3 py-6">
               <Avatar className="relative size-12 border-2 border-primary">
-                <AvatarImage src="https://github.com/DevPedroHB.png" />
+                <AvatarImage src={data.user.image || ""} />
                 <AvatarFallback>
                   <User2 className="size-5" />
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-1 flex-col">
-                <p className="font-bold">Pedro Henrique Bérgamo</p>
+                <p className="font-bold">{data.user.name}</p>
                 <small className="text-xs text-muted-foreground">
-                  email@pedrohb.dev
+                  {data.user.email}
                 </small>
               </div>
             </div>
           ) : (
             <div className="flex items-center justify-between gap-6 py-6">
               <p className="text-lg font-bold">Olá, faça seu login!</p>
-              <Button type="button" size="icon" onClick={handleChangeAuth}>
-                <LogIn className="size-5" />
-              </Button>
+              <LoginDialog>
+                <Button type="button" size="icon">
+                  <LogIn className="size-5" />
+                </Button>
+              </LoginDialog>
             </div>
           )}
           <div className="flex flex-col gap-1 border-t py-6">
@@ -101,12 +104,12 @@ export function NavbarResponsive() {
               );
             })}
           </div>
-          {auth && (
+          {data?.user && (
             <SheetFooter className="border-t py-6">
               <Button
                 type="button"
                 variant="ghost"
-                onClick={handleChangeAuth}
+                onClick={handleSignOut}
                 className="w-full justify-start gap-3"
               >
                 <LogOut className="size-4" />

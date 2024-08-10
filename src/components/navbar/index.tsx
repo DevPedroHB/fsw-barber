@@ -2,10 +2,11 @@
 
 import { navbarLinks } from "@/constants/navbar-links";
 import { Calendar, User2, UserCircle2 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { LoginDialog } from "../login-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
@@ -14,11 +15,7 @@ import { NavbarSearchForm } from "./navbar-search-form";
 
 export function Navbar() {
   const pathname = usePathname();
-  const [auth, setAuth] = useState(false);
-
-  function handleChangeAuth() {
-    setAuth((prev) => !prev);
-  }
+  const { data } = useSession();
 
   return (
     <Card className="sticky top-0 h-24 w-full rounded-none">
@@ -46,29 +43,28 @@ export function Navbar() {
               </span>
             </Button>
           </Link>
-          {auth ? (
-            <div
-              onClick={handleChangeAuth}
-              className="flex cursor-pointer items-center gap-2"
-            >
+          {data?.user ? (
+            <div className="flex items-center gap-2">
               <Avatar className="relative size-9">
-                <AvatarImage src="https://github.com/DevPedroHB.png" />
+                <AvatarImage src={data.user.image || ""} />
                 <AvatarFallback>
                   <User2 className="size-5" />
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-1 flex-col">
-                <p className="text-sm font-bold">Pedro Henrique Bérgamo</p>
+                <p className="text-sm font-bold">{data.user.name}</p>
                 <small className="text-xs text-muted-foreground">
-                  pedrohenriquebergamo.16@gmail.com
+                  {data.user.email}
                 </small>
               </div>
             </div>
           ) : (
-            <Button type="button" onClick={handleChangeAuth} className="gap-2">
-              <UserCircle2 className="size-4" />
-              Perfil
-            </Button>
+            <LoginDialog>
+              <Button type="button" className="gap-2">
+                <UserCircle2 className="size-4" />
+                Perfil
+              </Button>
+            </LoginDialog>
           )}
         </div>
         <NavbarResponsive />

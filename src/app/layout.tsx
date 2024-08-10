@@ -1,4 +1,5 @@
 import { cn } from "@/functions/utils";
+import { SessionProvider } from "@/providers/session-provider";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import type { ReactNode } from "react";
@@ -31,7 +32,7 @@ export default function RootLayout({ children }: Readonly<IRootLayout>) {
           nunito.variable,
         )}
       >
-        {children}
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );
