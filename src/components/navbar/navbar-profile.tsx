@@ -2,9 +2,10 @@
 
 import { themes } from "@/constants/themes";
 import { User2 } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import { tv, type VariantProps } from "tailwind-variants";
+import { SignOutDialog } from "../sign-out-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
@@ -50,10 +51,6 @@ export function NavbarProfile({ variant }: INavbarProfile) {
   const { data } = useSession();
   const { trigger, avatar } = navbarProfile({ variant });
 
-  function handleSignOut() {
-    signOut();
-  }
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={trigger()}>
@@ -92,8 +89,8 @@ export function NavbarProfile({ variant }: INavbarProfile) {
           <DropdownMenuItem>Configurações</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleSignOut}>
-          Sair da conta
+        <DropdownMenuItem asChild>
+          <SignOutDialog className="w-full">Sair da conta</SignOutDialog>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

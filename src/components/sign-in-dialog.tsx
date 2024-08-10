@@ -1,11 +1,11 @@
 "use client";
 
+import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import type { ReactNode } from "react";
 import {
   AlertDialog,
-  AlertDialogCancel,
+  AlertDialogAction,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -14,18 +14,16 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 
-interface ILoginDialog {
-  children: ReactNode;
-}
+interface ISignInDialog extends AlertDialogPrimitive.AlertDialogTriggerProps {}
 
-export function LoginDialog({ children }: ILoginDialog) {
+export function SignInDialog(props: ISignInDialog) {
   async function handleSignInWithGoogle() {
     await signIn("google");
   }
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+      <AlertDialogTrigger {...props} />
       <AlertDialogContent className="max-w-xs gap-5">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-center font-bold">
@@ -35,10 +33,11 @@ export function LoginDialog({ children }: ILoginDialog) {
             Conecte-se usando sua conta do Google ou Github.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter className="sm:space-x-2.5">
-          <AlertDialogCancel
+        <AlertDialogFooter className="gap-2.5">
+          <AlertDialogAction
+            variant="outline"
             onClick={handleSignInWithGoogle}
-            className="flex-1 gap-2 font-bold"
+            className="flex-1"
           >
             <Image
               src="/svgs/google.svg"
@@ -48,8 +47,8 @@ export function LoginDialog({ children }: ILoginDialog) {
               className="invert dark:invert-0"
             />
             Google
-          </AlertDialogCancel>
-          <AlertDialogCancel className="flex-1 gap-2 font-bold">
+          </AlertDialogAction>
+          <AlertDialogAction variant="outline" className="flex-1">
             <Image
               src="/svgs/github.svg"
               alt="Github"
@@ -58,7 +57,7 @@ export function LoginDialog({ children }: ILoginDialog) {
               className="invert dark:invert-0"
             />
             Github
-          </AlertDialogCancel>
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

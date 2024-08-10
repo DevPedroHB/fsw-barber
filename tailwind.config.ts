@@ -22,6 +22,9 @@ const config = {
       fontFamily: {
         sans: ["var(--font-nunito)", ...fontFamily.sans],
       },
+      backgroundImage: {
+        "hero-img": "url(/images/hero.jpg)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

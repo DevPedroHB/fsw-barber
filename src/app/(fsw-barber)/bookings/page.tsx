@@ -6,8 +6,8 @@ export const metadata: Metadata = {
 
 export default function Bookings() {
   return (
-    <div>
-      <h1>Agendamentos</h1>
-    </div>
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1>Page Bookings</h1>
+    </main>
   );
 }

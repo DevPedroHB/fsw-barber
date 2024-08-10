@@ -6,19 +6,19 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LoginDialog } from "../login-dialog";
+import { SearchForm } from "../search-form";
+import { SignInDialog } from "../sign-in-dialog";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { NavbarProfile } from "./navbar-profile";
 import { NavbarResponsive } from "./navbar-responsive";
-import { NavbarSearchForm } from "./navbar-search-form";
 
 export function Navbar() {
   const pathname = usePathname();
   const { data } = useSession();
 
   return (
-    <Card className="sticky top-0 h-24 w-full rounded-none">
+    <Card className="sticky top-0 z-10 h-24 w-full rounded-none">
       <CardContent className="mx-auto flex h-full max-w-[76.5rem] items-center justify-between gap-11 px-5 py-0">
         <Link href="/" className="relative w-[8.125rem]">
           <Image
@@ -29,13 +29,13 @@ export function Navbar() {
             className="size-full object-cover object-center"
           />
         </Link>
-        <NavbarSearchForm />
+        <SearchForm variant="navbar" />
         <div className="flex items-center gap-6 max-md:hidden">
           <Link href={navbarLinks[1].path} title={navbarLinks[1].label}>
             <Button
               type="button"
               variant={pathname === navbarLinks[1].path ? "secondary" : "ghost"}
-              className="group gap-2 transition-all"
+              className="group transition-all"
             >
               <Calendar className="size-4 max-lg:size-5" />
               <span className="max-lg:hidden max-lg:group-hover:flex">
@@ -46,12 +46,12 @@ export function Navbar() {
           {data?.user ? (
             <NavbarProfile />
           ) : (
-            <LoginDialog>
-              <Button type="button" className="gap-2">
+            <SignInDialog asChild>
+              <Button type="button">
                 <UserCircle2 className="size-4" />
                 Perfil
               </Button>
-            </LoginDialog>
+            </SignInDialog>
           )}
         </div>
         <NavbarResponsive />

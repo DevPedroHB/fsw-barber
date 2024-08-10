@@ -12,9 +12,7 @@ export default function FSWBarberLayout({
   return (
     <>
       <Navbar />
-      <main className="mx-auto min-h-screen max-w-[76.5rem] px-5">
-        {children}
-      </main>
+      {children}
       <Footer />
     </>
   );

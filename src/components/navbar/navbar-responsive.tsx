@@ -3,9 +3,10 @@
 import { filters } from "@/constants/filters";
 import { navbarLinks } from "@/constants/navbar-links";
 import { LogIn, LogOut, Menu } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { LoginDialog } from "../login-dialog";
+import { SignInDialog } from "../sign-in-dialog";
+import { SignOutDialog } from "../sign-out-dialog";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import {
@@ -21,10 +22,6 @@ import { NavbarProfile } from "./navbar-profile";
 
 export function NavbarResponsive() {
   const { data } = useSession();
-
-  function handleSignOut() {
-    signOut();
-  }
 
   return (
     <Sheet>
@@ -47,12 +44,12 @@ export function NavbarResponsive() {
             <NavbarProfile variant="responsive" />
           ) : (
             <div className="flex items-center justify-between gap-6 py-6">
-              <p className="text-lg font-bold">Olá, faça seu login!</p>
-              <LoginDialog>
+              <p className="flex-1 text-lg font-bold">Olá, faça seu login!</p>
+              <SignInDialog asChild>
                 <Button type="button" size="icon">
                   <LogIn className="size-5" />
                 </Button>
-              </LoginDialog>
+              </SignInDialog>
             </div>
           )}
           <div className="flex flex-col gap-1 border-t py-6">
@@ -94,15 +91,16 @@ export function NavbarResponsive() {
           </div>
           {data?.user && (
             <SheetFooter className="border-t py-6">
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={handleSignOut}
-                className="w-full justify-start gap-3"
-              >
-                <LogOut className="size-4" />
-                Sair da conta
-              </Button>
+              <SignOutDialog asChild>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="w-full justify-start gap-3"
+                >
+                  <LogOut className="size-4" />
+                  Sair da conta
+                </Button>
+              </SignOutDialog>
             </SheetFooter>
           )}
         </ScrollArea>
