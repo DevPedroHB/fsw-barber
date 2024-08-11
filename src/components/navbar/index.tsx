@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 import { SearchForm } from "../search-form";
 import { SignInDialog } from "../sign-in-dialog";
 import { Button } from "../ui/button";
@@ -29,7 +30,9 @@ export function Navbar() {
             className="size-full object-cover object-center"
           />
         </Link>
-        <SearchForm variant="navbar" />
+        <Suspense>
+          <SearchForm variant="navbar" />
+        </Suspense>
         <div className="flex items-center gap-6 max-md:hidden">
           <Link href={navbarLinks[1].path} title={navbarLinks[1].label}>
             <Button
