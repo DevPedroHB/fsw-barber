@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 
 interface ICardBarbershop {
-  barbershop: Pick<Barbershop, "id" | "name" | "address" | "imageUrl">;
+  barbershop: Barbershop;
 }
 
 export function CardBarbershop({ barbershop }: ICardBarbershop) {
@@ -21,9 +21,6 @@ export function CardBarbershop({ barbershop }: ICardBarbershop) {
         <div className="flex flex-col gap-1">
           <h4 className="truncate font-bold">{barbershop.name}</h4>
           <p className="line-clamp-2 text-xs text-muted-foreground">
-            {barbershop.address}
-            {barbershop.address}
-            {barbershop.address}
             {barbershop.address}
           </p>
         </div>

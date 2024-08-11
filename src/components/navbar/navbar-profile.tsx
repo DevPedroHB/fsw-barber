@@ -55,15 +55,15 @@ export function NavbarProfile({ variant }: INavbarProfile) {
     <DropdownMenu>
       <DropdownMenuTrigger className={trigger()}>
         <Avatar className={avatar()}>
-          <AvatarImage src={data?.user?.image || ""} />
+          <AvatarImage src={data?.user.image || ""} />
           <AvatarFallback>
             <User2 className="size-5" />
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-1 flex-col items-start">
-          <p className="text-sm font-bold">{data?.user?.name}</p>
+          <p className="text-sm font-bold">{data?.user.name}</p>
           <small className="text-xs text-muted-foreground">
-            {data?.user?.email}
+            {data?.user.email}
           </small>
         </div>
       </DropdownMenuTrigger>

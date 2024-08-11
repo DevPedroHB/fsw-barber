@@ -18,8 +18,8 @@ export const nextAuthOptions: NextAuthOptions = {
     async session({ session, user }) {
       session.user = {
         ...session.user,
-        id: user.id,
-      } as any;
+        ...user,
+      };
 
       return session;
     },

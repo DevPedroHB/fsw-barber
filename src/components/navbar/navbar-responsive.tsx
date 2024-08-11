@@ -5,6 +5,8 @@ import { navbarLinks } from "@/constants/navbar-links";
 import { LogIn, LogOut, Menu } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { Suspense } from "react";
+import { SearchForm } from "../search-form";
 import { SignInDialog } from "../sign-in-dialog";
 import { SignOutDialog } from "../sign-out-dialog";
 import { Button } from "../ui/button";
@@ -52,6 +54,9 @@ export function NavbarResponsive() {
               </SignInDialog>
             </div>
           )}
+          <Suspense>
+            <SearchForm variant="navbar-responsive" />
+          </Suspense>
           <div className="flex flex-col gap-1 border-t py-6">
             {navbarLinks.map((link) => {
               const Icon = link.icon;

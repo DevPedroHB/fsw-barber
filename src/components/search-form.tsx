@@ -23,6 +23,9 @@ const searchForm = tv({
         root: "flex-1 max-md:hidden",
         button: "max-lg:hidden",
       },
+      "navbar-responsive": {
+        root: "w-full border-t py-6",
+      },
     },
   },
 });
