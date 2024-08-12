@@ -1,5 +1,5 @@
 import { api } from "@/lib/ky";
-import type { Barbershop } from "@/types/barbershop";
+import type { Barbershop } from "@prisma/client";
 
 interface IFetchBarbershopsResponse {
   barbershops: Barbershop[];

@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/functions/utils";
 import { SessionProvider } from "@/providers/session-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: Readonly<IRootLayout>) {
         <SessionProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             {children}
+            <Toaster richColors pauseWhenPageIsHidden />
           </ThemeProvider>
         </SessionProvider>
       </body>

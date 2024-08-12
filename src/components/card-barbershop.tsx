@@ -1,4 +1,4 @@
-import type { Barbershop } from "@/types/barbershop";
+import type { Barbershop } from "@prisma/client";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,8 +17,8 @@ export function CardBarbershop({ barbershop }: ICardBarbershop) {
       <Image
         src={barbershop.imageUrl}
         alt={barbershop.name}
-        width={1000}
-        height={1000}
+        width={1366}
+        height={768}
         className="h-auto w-full rounded-lg object-cover object-center"
       />
       <div className="flex flex-col gap-3 p-2 pt-3">

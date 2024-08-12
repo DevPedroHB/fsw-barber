@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import type { Barbershop } from "@/types/barbershop";
+import type { Barbershop } from "@prisma/client";
 
 interface IBarbershopsCarousel {
   title: string;

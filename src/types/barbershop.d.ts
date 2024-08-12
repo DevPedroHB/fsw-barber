@@ -1,8 +1,8 @@
-export interface Barbershop {
-  id: string;
-  name: string;
-  address: string;
-  phones: string[];
-  description: string;
-  imageUrl: string;
-}
+import type { Prisma } from "@prisma/client";
+
+export interface BarbershopWithServices
+  extends Prisma.BarbershopGetPayload<{
+    include: {
+      services: true;
+    };
+  }> {}

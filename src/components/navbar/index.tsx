@@ -27,7 +27,7 @@ export function Navbar() {
             alt="FSW Barber"
             width={130}
             height={22}
-            className="size-full object-cover object-center"
+            className="h-auto w-full object-cover object-center"
           />
         </Link>
         <Suspense>
