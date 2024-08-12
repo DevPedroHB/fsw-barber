@@ -11,14 +11,13 @@ export function NavbarLink({ children, className, ...rest }: INavbarLink) {
   const pathname = usePathname();
 
   return (
-    <Link {...rest}>
-      <Button
-        type="button"
-        variant={pathname === rest.href ? "default" : "ghost"}
-        className={className}
-      >
-        {children}
-      </Button>
-    </Link>
+    <Button
+      type="button"
+      variant={pathname === rest.href ? "default" : "ghost"}
+      className={className}
+      asChild
+    >
+      <Link {...rest}>{children}</Link>
+    </Button>
   );
 }

@@ -2,9 +2,11 @@
 
 import { filters } from "@/constants/filters";
 import { navbarLinks } from "@/constants/navbar-links";
+import { searchParams } from "@/functions/search-params";
 import { LogIn, LogOut, Menu } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { SearchForm } from "../search-form";
 import { SignInDialog } from "../sign-in-dialog";
@@ -24,6 +26,14 @@ import { NavbarProfile } from "./navbar-profile";
 
 export function NavbarResponsive() {
   const { data } = useSession();
+  const nextSearchParams = useSearchParams();
+  const router = useRouter();
+
+  function handleSearch(query: string) {
+    const newParams = searchParams.set({ query }, nextSearchParams);
+
+    router.push(`/search?${newParams}`);
+  }
 
   return (
     <Sheet>
@@ -80,6 +90,7 @@ export function NavbarResponsive() {
                   key={filter.label}
                   type="button"
                   variant="ghost"
+                  onClick={() => handleSearch(filter.label.toLowerCase())}
                   className="w-full justify-start gap-3"
                 >
                   <Image

@@ -2,7 +2,6 @@ import type { Barbershop } from "@/types/barbershop";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -15,15 +14,13 @@ interface ICardBarbershop {
 export function CardBarbershop({ barbershop }: ICardBarbershop) {
   return (
     <Card className="relative w-full max-w-52 p-1">
-      <Suspense fallback={<Skeleton className="aspect-video size-full" />}>
-        <Image
-          src={barbershop.imageUrl}
-          alt={barbershop.name}
-          width={1000}
-          height={1000}
-          className="aspect-video size-full rounded-lg object-cover object-center"
-        />
-      </Suspense>
+      <Image
+        src={barbershop.imageUrl}
+        alt={barbershop.name}
+        width={1000}
+        height={1000}
+        className="h-auto w-full rounded-lg object-cover object-center"
+      />
       <div className="flex flex-col gap-3 p-2 pt-3">
         <div className="flex flex-col gap-1">
           <h4 className="truncate font-bold">{barbershop.name}</h4>

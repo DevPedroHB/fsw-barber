@@ -34,18 +34,19 @@ export function Navbar() {
           <SearchForm variant="navbar" />
         </Suspense>
         <div className="flex items-center gap-6 max-md:hidden">
-          <Link href={navbarLinks[1].path} title={navbarLinks[1].label}>
-            <Button
-              type="button"
-              variant={pathname === navbarLinks[1].path ? "secondary" : "ghost"}
-              className="group transition-all"
-            >
+          <Button
+            type="button"
+            variant={pathname === navbarLinks[1].path ? "secondary" : "ghost"}
+            className="group transition-all"
+            asChild
+          >
+            <Link href={navbarLinks[1].path} title={navbarLinks[1].label}>
               <Calendar className="size-4 max-lg:size-5" />
               <span className="max-lg:hidden max-lg:group-hover:flex">
                 {navbarLinks[1].label}
               </span>
-            </Button>
-          </Link>
+            </Link>
+          </Button>
           {data?.user ? (
             <NavbarProfile />
           ) : (
@@ -57,7 +58,9 @@ export function Navbar() {
             </SignInDialog>
           )}
         </div>
-        <NavbarResponsive />
+        <Suspense>
+          <NavbarResponsive />
+        </Suspense>
       </CardContent>
     </Card>
   );

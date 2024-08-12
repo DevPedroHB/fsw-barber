@@ -1,3 +1,5 @@
+import { CardBarbershop } from "@/components/card-barbershop";
+import { search } from "@/http/search";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -15,17 +17,28 @@ export async function generateMetadata({
   };
 }
 
-export default function Search({ searchParams }: ISearch) {
+export default async function Search({ searchParams }: ISearch) {
   const { query } = searchParams;
 
   if (!query) {
     redirect("/");
   }
 
+  const { barbershops } = await search(query);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1>Page Search</h1>
-      <pre>{JSON.stringify(searchParams, null, 2)}</pre>
+    <main className="mx-auto my-10 min-h-screen max-w-[76.5rem] space-y-5 px-5">
+      <h1 className="text-xl font-bold">Resultados para “{query}”</h1>
+      <section className="flex flex-wrap gap-5">
+        {barbershops.map((barbershop) => {
+          return <CardBarbershop key={barbershop.id} barbershop={barbershop} />;
+        })}
+        {barbershops.length === 0 && (
+          <h2 className="text-muted-foreground">
+            Nenhum resultado foi encontrado. Tente novamente com outro termo.
+          </h2>
+        )}
+      </section>
     </main>
   );
 }
