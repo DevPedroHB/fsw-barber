@@ -8,7 +8,7 @@ interface IListPhones {
   phones: string[];
 }
 
-export function ListPhones({ phones }: IListPhones) {
+export function BarbershopListPhones({ phones }: IListPhones) {
   async function handleCopyPhone(phone: string) {
     if (navigator.clipboard) {
       try {

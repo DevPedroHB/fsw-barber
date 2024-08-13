@@ -1,4 +1,4 @@
-interface IOpeningHours {
+export interface IOpeningHours {
   dayOfWeek: number;
   schedules: {
     from: Date;
@@ -43,9 +43,9 @@ export const openingHours: IOpeningHours[] = [
   {
     dayOfWeek: 6,
     schedules: {
-      from: new Date("2024-08-17T07:00:00"),
-      to: new Date("2024-08-17T17:00:00"),
-      gap: 30,
+      from: new Date("2024-08-17T08:00:00"),
+      to: new Date("2024-08-17T16:00:00"),
+      gap: 45,
     },
   },
 ];

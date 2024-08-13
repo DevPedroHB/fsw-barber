@@ -4,6 +4,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { nextAuthOptions } from "@/constants/next-auth-options";
 import { formatDate } from "@/functions/format-date";
@@ -63,6 +65,12 @@ export default async function Home() {
                         </CarouselItem>
                       ))}
                     </CarouselContent>
+                    {upcomingBookings.length > 0 && (
+                      <>
+                        <CarouselPrevious className="-top-4" />
+                        <CarouselNext className="-bottom-4" />
+                      </>
+                    )}
                   </Carousel>
                 </div>
               )}

@@ -1,13 +1,13 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-interface IGetBarbershop {
+interface IBarbershop {
   params: {
     barbershopId: string;
   };
 }
 
-export async function GET(request: Request, { params }: IGetBarbershop) {
+export async function GET(request: Request, { params }: IBarbershop) {
   const barbershop = await prisma.barbershop.findUnique({
     where: {
       id: params.barbershopId,

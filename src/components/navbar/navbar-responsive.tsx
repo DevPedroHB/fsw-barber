@@ -51,7 +51,7 @@ export function NavbarResponsive() {
         <SheetHeader>
           <SheetTitle className="text-start text-lg font-bold">Menu</SheetTitle>
         </SheetHeader>
-        <ScrollArea className="h-full" type="scroll">
+        <ScrollArea className="h-full w-fit" type="scroll">
           {data?.user ? (
             <NavbarProfile variant="responsive" />
           ) : (
