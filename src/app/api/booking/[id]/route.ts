@@ -17,6 +17,7 @@ export async function POST(request: Request, { params }: IBooking) {
 
   if (!session) {
     return NextResponse.json({
+      revalidated: true,
       bookingId: null,
     });
   }
@@ -42,12 +43,48 @@ export async function POST(request: Request, { params }: IBooking) {
     revalidateTag("bookings");
 
     return NextResponse.json({
+      revalidated: true,
       bookingId: booking.id,
     });
   } catch (error) {
     console.log(error);
 
     return NextResponse.json({
+      revalidated: true,
+      bookingId: null,
+    });
+  }
+}
+
+export async function DELETE(request: Request, { params }: IBooking) {
+  const session = await getServerSession(nextAuthOptions);
+
+  if (!session) {
+    return NextResponse.json({
+      revalidated: true,
+      bookingId: null,
+    });
+  }
+
+  try {
+    const booking = await prisma.booking.delete({
+      where: {
+        id: params.id,
+        userId: session.user.id,
+      },
+    });
+
+    revalidateTag("bookings");
+
+    return NextResponse.json({
+      revalidated: true,
+      bookingId: booking.id,
+    });
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json({
+      revalidated: true,
       bookingId: null,
     });
   }

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { Skeleton } from "./ui/skeleton";
 
 interface ICardBarbershop {
   barbershop: Barbershop;
@@ -36,22 +35,6 @@ export function CardBarbershop({ barbershop }: ICardBarbershop) {
         <Star className="size-3" />
         5,0
       </Badge>
-    </Card>
-  );
-}
-
-export function CardBarbershopSkeleton() {
-  return (
-    <Card className="relative w-52 p-1">
-      <Skeleton className="aspect-video size-full" />
-      <div className="space-y-3 p-2 pt-3">
-        <div className="space-y-2">
-          <Skeleton className="h-5 w-full" />
-          <Skeleton className="h-4 w-full" />
-        </div>
-        <Skeleton className="h-10 w-full" />
-      </div>
-      <Skeleton className="absolute left-2 top-2 h-5 w-14 rounded-full" />
     </Card>
   );
 }

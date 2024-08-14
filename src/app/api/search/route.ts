@@ -29,6 +29,7 @@ export async function GET(request: NextRequest) {
   });
 
   return NextResponse.json({
+    revalidated: true,
     barbershops,
   });
 }

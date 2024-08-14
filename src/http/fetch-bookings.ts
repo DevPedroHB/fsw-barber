@@ -1,15 +1,18 @@
 import { api } from "@/lib/ky";
-import type { Booking } from "@/types/booking";
+import type { BookingDetails } from "@/types/booking";
 import { headers } from "next/headers";
 
 interface IFetchBookingsResponse {
-  bookings: Booking[];
+  bookings: BookingDetails[];
 }
 
 export async function fetchBookings() {
   const result = await api
     .get("bookings", {
       headers: headers(),
+      next: {
+        tags: ["bookings"],
+      },
     })
     .json<IFetchBookingsResponse>();
 

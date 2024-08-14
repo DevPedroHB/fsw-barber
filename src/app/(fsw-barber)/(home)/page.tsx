@@ -11,8 +11,10 @@ import { nextAuthOptions } from "@/constants/next-auth-options";
 import { formatDate } from "@/functions/format-date";
 import { fetchBarbershops } from "@/http/fetch-barbershops";
 import { fetchBookings } from "@/http/fetch-bookings";
+import { isAfter } from "date-fns";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 import { Suspense } from "react";
 import { BarbershopsCarousel } from "./components/barbershops-carousel";
 
@@ -26,8 +28,8 @@ export default async function Home() {
   const { bookings } = await fetchBookings();
   const { barbershops } = await fetchBarbershops();
 
-  const upcomingBookings = bookings.filter(
-    (booking) => new Date(booking.date) > currentDate,
+  const upcomingBookings = bookings.filter((booking) =>
+    isAfter(booking.date, new Date()),
   );
 
   return (
@@ -61,11 +63,13 @@ export default async function Home() {
                     <CarouselContent className="h-[132px]">
                       {upcomingBookings.map((booking) => (
                         <CarouselItem key={booking.id} className="basis-auto">
-                          <CardBooking booking={booking} />
+                          <Link href={`/bookings?booking=${booking.id}`}>
+                            <CardBooking booking={booking} />
+                          </Link>
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    {upcomingBookings.length > 0 && (
+                    {upcomingBookings.length > 1 && (
                       <>
                         <CarouselPrevious className="-top-4" />
                         <CarouselNext className="-bottom-4" />

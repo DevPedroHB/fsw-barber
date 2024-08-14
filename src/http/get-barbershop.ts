@@ -7,7 +7,11 @@ interface IGetBarbershopResponse {
 
 export async function getBarbershop(barbershopId: string) {
   const result = await api
-    .get(`barbershop/${barbershopId}`)
+    .get(`barbershop/${barbershopId}`, {
+      next: {
+        tags: [`barbershop/${barbershopId}`],
+      },
+    })
     .json<IGetBarbershopResponse>();
 
   return result;

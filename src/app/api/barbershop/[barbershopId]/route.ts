@@ -18,6 +18,7 @@ export async function GET(request: Request, { params }: IBarbershop) {
   });
 
   return NextResponse.json({
+    revalidated: true,
     barbershop,
   });
 }

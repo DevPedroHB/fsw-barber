@@ -81,15 +81,16 @@ export function BarbershopBookingForm({
     });
 
     if (!bookingId) {
-      toast.error("Ocorreu um erro ao agendar a reserva.", {
-        description: "Por favor, tente novamente mais tarde.",
+      toast.error("Reserva", {
+        description:
+          "Ocorreu um erro ao agendar a reserva. Por favor, tente novamente mais tarde.",
       });
 
       return;
     }
 
-    toast.success("Reserva Efetuada!", {
-      description: "Sua reserva foi agendada com sucesso.",
+    toast.success("Reserva", {
+      description: "Reserva Efetuada! Sua reserva foi agendada com sucesso.",
     });
 
     form.reset();

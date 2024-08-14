@@ -1,3 +1,4 @@
+import { BarbershopListPhones } from "@/components/barbershop-list-phones";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { openingHours } from "@/constants/opening-hours";
@@ -5,7 +6,6 @@ import { formatDate } from "@/functions/format-date";
 import type { Barbershop } from "@prisma/client";
 import { User2 } from "lucide-react";
 import Image from "next/image";
-import { BarbershopListPhones } from "./barbershop-list-phones";
 
 interface IBarbershopCard {
   barbershop: Barbershop;

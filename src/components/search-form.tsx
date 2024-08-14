@@ -70,7 +70,6 @@ export function SearchForm({ className, variant, ...rest }: ISearchForm) {
                   type="search"
                   placeholder="Buscar barbearias"
                   className="flex-1"
-                  required
                   {...field}
                 />
               </FormControl>

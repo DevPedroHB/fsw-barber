@@ -11,6 +11,9 @@ export async function search(query: string) {
       searchParams: {
         query,
       },
+      next: {
+        tags: [`search/${query}`],
+      },
     })
     .json<ISearchResponse>();
 

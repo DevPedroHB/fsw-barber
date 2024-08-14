@@ -14,18 +14,23 @@ export function BarbershopListPhones({ phones }: IListPhones) {
       try {
         await navigator.clipboard.writeText(phone);
 
-        toast.success(`Número ${phone} copiado com sucesso!`);
+        toast.success("Telefone", {
+          description: `Número ${phone} copiado com sucesso!`,
+        });
       } catch (error) {
         window.location.href = `tel:${phone}`;
 
-        toast.error("Ocorreu um erro ao tentar copiar o número.");
+        toast.error("Telefone", {
+          description: "Ocorreu um erro ao tentar copiar o número.",
+        });
       }
     } else {
       window.location.href = `tel:${phone}`;
 
-      toast.warning(
-        "Seu navegador não suporta a funcionalidade de copiar texto. Tente usar o Ctrl+C para copiar o número manualmente.",
-      );
+      toast.warning("Telefone", {
+        description:
+          "Seu navegador não suporta a funcionalidade de copiar texto. Tente usar o Ctrl+C para copiar o número manualmente.",
+      });
     }
   }
 

@@ -6,7 +6,13 @@ interface IFetchBarbershopsResponse {
 }
 
 export async function fetchBarbershops() {
-  const result = await api.get("barbershops").json<IFetchBarbershopsResponse>();
+  const result = await api
+    .get("barbershops", {
+      next: {
+        tags: ["barbershops"],
+      },
+    })
+    .json<IFetchBarbershopsResponse>();
 
   return result;
 }

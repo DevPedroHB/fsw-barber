@@ -8,6 +8,7 @@ export async function GET() {
 
   if (!session) {
     return NextResponse.json({
+      revalidated: true,
       bookings: [],
     });
   }
@@ -24,10 +25,14 @@ export async function GET() {
         select: {
           id: true,
           name: true,
+          price: true,
           barbershop: {
             select: {
               id: true,
               name: true,
+              address: true,
+              phones: true,
+              description: true,
               imageUrl: true,
             },
           },
@@ -40,6 +45,7 @@ export async function GET() {
   });
 
   return NextResponse.json({
+    revalidated: true,
     bookings,
   });
 }

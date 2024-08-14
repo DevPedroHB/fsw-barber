@@ -10,8 +10,7 @@ export interface IFormattedOpeningHours {
 export function generateTimeSlots(
   openingHours: IOpeningHours[],
 ): IFormattedOpeningHours[] {
-  return openingHours.map(({ dayOfWeek, schedules }) => {
-    const { from, to, gap } = schedules;
+  return openingHours.map(({ dayOfWeek, schedules: { from, to, gap } }) => {
     const formattedSchedules: string[] = [];
     let currentTime = from;
 
